@@ -22,11 +22,11 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
-    // @ExceptionHandler(FieldException.class)
-    // public ResponseEntity<?> handleFieldException(FieldException ex){
-    //     ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage());
-    //     return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
-    // }
+    @ExceptionHandler(FieldException.class)
+    public ResponseEntity<?> handleFieldException(FieldException ex){
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage());
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
 
     // @ExceptionHandler(NotFoundException.class)
     // public ResponseEntity<?> handleNotFoundException(NotFoundException ex){
