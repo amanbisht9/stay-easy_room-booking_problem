@@ -45,7 +45,7 @@ public class SecurityConfig {
         http    
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/user/register", "user/login").permitAll() // Allow anyone to register
-                        // .requestMatchers("/book/register","/book/update/{id}","/book/delete/{id}","/book/rent","/book/unrent").hasAuthority("ADMIN") // Only admins can register books
+                        .requestMatchers("/hotel/register").hasAuthority("ADMIN") // Only admins can register books
                         // .requestMatchers("/book/available","/book/all").hasAnyAuthority("ADMIN","USER")
                         .anyRequest().authenticated())
                         .httpBasic(Customizer.withDefaults())
@@ -64,13 +64,13 @@ public class SecurityConfig {
         return myUserDetailService;
     }
     
-    @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(myUserDetailService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
-    }
+    // @Bean
+    // public AuthenticationProvider authenticationProvider(){
+    //     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    //     provider.setUserDetailsService(myUserDetailService);
+    //     provider.setPasswordEncoder(passwordEncoder());
+    //     return provider;
+    // }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {

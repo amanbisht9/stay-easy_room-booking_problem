@@ -4,7 +4,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +19,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtHelper {
 
     //requirement :
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    public static final long JWT_TOKEN_VALIDITY = 24 * 60 * 60;
 
     //    public static final long JWT_TOKEN_VALIDITY =  60;
     private String secret = "afafasfafafasfasfasfafacasdasfasxASFACASDFACASDFASFASFDAFASFASDAADSCSDFADCVSGCFVADXCcadwavfsfarvf";
@@ -50,6 +53,15 @@ public class JwtHelper {
     //generate token for user
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
+
+        //getting role
+        List<String> role = userDetails.getAuthorities()
+        .stream()
+        .map(GrantedAuthority::getAuthority)
+        .collect(Collectors.toList());
+
+        claims.put("role", role.get(0));
+
         return doGenerateToken(claims, userDetails.getUsername());
     }
 

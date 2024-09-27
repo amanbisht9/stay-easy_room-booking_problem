@@ -26,5 +26,5 @@ public class ValidationChecks {
         return name.matches(nameRegex);
 
     }
-    
+
 }
