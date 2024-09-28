@@ -56,7 +56,7 @@ This project is a simplified version of an online room booking system with a foc
 ### Prerequisites
 - Java 21
 - MySQL
-- Maven/Gradle
+- Gradle
 - Postman or any API testing tool for testing endpoints
 
 ### Steps to Run
