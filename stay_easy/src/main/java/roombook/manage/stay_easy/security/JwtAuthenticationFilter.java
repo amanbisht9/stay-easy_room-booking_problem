@@ -18,6 +18,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import roombook.manage.stay_easy.service.MyUserDetailService;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -28,7 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private MyUserDetailService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, java.io.IOException {
@@ -65,13 +66,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             logger.info("Invalid Header Value !! ");
         }
 
-
-        //
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
 
             //fetch user detail from username
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             Boolean validateToken = this.jwtHelper.validateToken(token, userDetails);
             if (validateToken) {
 

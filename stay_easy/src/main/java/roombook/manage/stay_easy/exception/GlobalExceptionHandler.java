@@ -28,6 +28,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(FetchException.class)
+    public ResponseEntity<?> handleFetchException(FetchException ex){
+        ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage());
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
+    }
+
+
     // @ExceptionHandler(NotFoundException.class)
     // public ResponseEntity<?> handleNotFoundException(NotFoundException ex){
     //     ErrorDetails errorDetails = new ErrorDetails(new Date(), ex.getMessage());

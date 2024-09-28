@@ -58,7 +58,7 @@ public class UserRegisterLoginController {
 
         StatusToken response;
 
-        this.doAuthenticate(email, password);
+        // this.doAuthenticate(email, password);
         StatusMessage resp = userRegisterLoginService.userLoginS(email, password);
 
         if(resp.getStatus() == "Successful login"){
@@ -77,27 +77,26 @@ public class UserRegisterLoginController {
 
         }
 
-
         return new ResponseEntity<>(response , HttpStatus.OK);
     }
 
 
-    private void doAuthenticate(String email, String password) {
+    // private void doAuthenticate(String email, String password) {
 
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
-        try {
-            manager.authenticate(authentication);
+    //     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
+    //     try {
+    //         manager.authenticate(authentication);
 
 
-        } catch (BadCredentialsException e) {
-            throw new BadCredentialsException(" Invalid Username or Password  !!");
-        }
+    //     } catch (BadCredentialsException e) {
+    //         throw new BadCredentialsException(" Invalid Username or Password  !!");
+    //     }
 
-    }
+    // }
 
-    @ExceptionHandler(BadCredentialsException.class)
-    public String exceptionHandler() {
-        return "Credentials Invalid !!";
-    }
+    // @ExceptionHandler(BadCredentialsException.class)
+    // public String exceptionHandler() {
+    //     return "Credentials Invalid !!";
+    // }
 
 }
